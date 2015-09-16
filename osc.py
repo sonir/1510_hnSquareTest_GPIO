@@ -10,8 +10,9 @@ the basic structures of that file to implement a very simple bi-directional comm
 
 import socket, OSC, re, time, threading, math
 
-receive_address = 'xxx.xxx.xxx.xxx', 7000 #Mac Adress, Outgoing Port
-send_address = 'xxx.xxx.xxx.xxx', 9000 #iPhone Adress, Incoming Port
+# receive_address = 'xxx.xxx.xxx.xxx', 7000 #Mac Adress, Outgoing Port
+receive_address = '127.0.0.1', 7000 #Mac Adress, Outgoing Port
+send_address = '224.0.0.1', 9000 #iPhone Adress, Incoming Port
 
 class PiException(Exception):
 	def __init__(self, value):
@@ -82,4 +83,3 @@ except KeyboardInterrupt :
 	print "Waiting for Server-thread to finish"
 	st.join()
 	print "Done"
-	
