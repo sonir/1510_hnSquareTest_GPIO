@@ -13,14 +13,12 @@ GPIO.setup(PIN,GPIO.OUT)
 #     GPIO.output(PIN,False)
 #     time.sleep(1.0)
 
-while True :
-	GPIO.output(PIN,True)
-	time.sleep(1.0)
-	GPIO.output(PIN,False)
-	time.sleep(1.0)
+try:
+	while True :
+		GPIO.output(PIN,True)
+		time.sleep(1.0)
+		GPIO.output(PIN,False)
+		time.sleep(1.0)
 
-
-
-GPIO.cleanup()
-
-
+except KeyboardInterrupt :
+	GPIO.cleanup()
