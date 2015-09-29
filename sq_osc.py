@@ -17,19 +17,26 @@ class SquareOsc:
 
     def update (self) :
             if self.metro.update() :
-                while(self.rotation < self.click_times):
+                if(self.rotation < self.click_times):
                     if self.now >= self.list_max :
                         self.now = 0
                         self.rotation += 1
+                        return 0
                     elif self.list[self.now]==1:
                         self.now +=1
-                        print("OK")
+                        return 1
                     else:
-                        print("NULL")
                         self.now +=1
-                self.bang_flg = False
+                        # print("off")
+                        return 0
+                else:
+                    return -1
+            else:
+                return -1
+                    # print("rest")
 
-            return self.bang_flg
+
+
 
 
                 # self.blinker = ~self.blinker
