@@ -19,8 +19,9 @@ while True :
 	GPIO.output(PIN,False)
 	time.sleep(1.0)
 
-
-
-GPIO.cleanup()
-
+#except KeyboardInterrupt:
+# print("detect key interrupt\n")
+ 
+#GPIO.cleanup()
+#print("Program exit\n")
 
