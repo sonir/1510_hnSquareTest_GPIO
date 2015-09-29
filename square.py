@@ -14,6 +14,7 @@ try:
 		flg = sqo.update()
 		if flg == 1 :
 			GPIO.output(PIN,True)
+			print("ON")
 		elif  flg == 0 :
 			GPIO.output(PIN,False)
 		elif flg == -1 :
