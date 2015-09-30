@@ -9,7 +9,7 @@ class sl_gpio :
                 print("init")
                 global pins
                 self.GPIO.setmode(GPIO.BOARD)
-                for self.pin in pins[]
+                for self.pin in pins
                     print self.pin
                     self.GPIO.setup(self.pi,GPIO.OUT)
 
