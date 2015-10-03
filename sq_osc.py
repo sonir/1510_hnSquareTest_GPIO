@@ -1,7 +1,7 @@
 import sl_metro
 
 class SquareOsc:
-    def __init__ (self, interval) :
+    
         self.metro = sl_metro.Metro(interval)
         self.blinker = False
         self.counter = 0
