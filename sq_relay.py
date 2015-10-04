@@ -44,14 +44,14 @@ class SquareRelay :
             self.num=self.num+1
             self.flg = self.seqs[var].cycle()
             if self.flg == 1 :
-                print "on"
+                print ("on")
                 GPIO.output(self.pins[var],True)
                 time.sleep(0.1)
             elif self.flg == 0 :
                 GPIO.output(self.pins[var],False)
-                print "off"
+                print ("off")
             else :
-                print "unknown"
+                print ("unknown")
 
         # for is working correctlly.
         assert self.num == 6

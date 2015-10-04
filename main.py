@@ -1,6 +1,11 @@
-import sq_relay
+import sq_receive
+print "Square system is started"
+osc = sq_receive.SquareReceive(5137)
+osc.setup()
 
-sqRelay = sq_relay.SquareRelay(0.02)
-sqRelay.update()
+try:
+    while True:
+        print "ff"
 
-m
+except KeyboardInterrupt :
+	osc.terminate()
