@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-import sq_osc
+import sq_osc, time
 
 class SquareRelay :
     def __init__ (self, interval) :
@@ -17,11 +17,13 @@ class SquareRelay :
         # self.SEQ_SPD = 0.002
         self.seqs = []
         self.setup()
+        self.flg = 0
 
     def setup (self) :
         self.gpio_setup()
         for var in range(0, self.RELAY_MAX):
-            self.seqs.append( sq_osc.SquareOsc(self.SEQ_SPD) )
+            s = sq_osc.SquareOsc(self.SEQ_SPD)
+            self.seqs.append( s )
 
     def gpio_setup (self) :
         GPIO.setmode(GPIO.BOARD)
@@ -34,29 +36,35 @@ class SquareRelay :
 
 
     def update (self) :
-        print "SQRL::update"
-        flg = self.seqs[0].cycle
+        self.num = 0
 
-        # for var in range(0, self.RELAY_MAX):
-        #     flg = self.seqs[var].update
-        #     if flg== 1 :
-        #         print "on"
-        #         GPIO.output(self.pins[var],True)
-        #         time.sleep(0.1)
-        #     elif flg == 0 :
-        #         GPIO.output(self.pins[var],False)
-        #         print "off"
-        #     else :
-        #         print "unknown"
+        # SET for count is OK
+        assert self.RELAY_MAX==6
+        for var in range(0, self.RELAY_MAX):
+            self.num=self.num+1
+            self.flg = self.seqs[var].cycle()
+            if self.flg == 1 :
+                print "on"
+                GPIO.output(self.pins[var],True)
+                time.sleep(0.1)
+            elif self.flg == 0 :
+                GPIO.output(self.pins[var],False)
+                print "off"
+            else :
+                print "unknown"
+
+        # for is working correctlly.
+        assert self.num == 6
+
 
     def on (self,relay_num) :
         # GPIO.output(self.pins[relay_num],True)
-        print "SEQ:bang"
+        # print "SEQ:bang"
         self.seqs[relay_num].bang()
 
     def off (self,relay_num) :
         pass
         # GPIO.output(self.pins[relay_num],False)
 
-    def Terminate(self) :
+    def terminate(self) :
         GPIO.cleanup()

@@ -10,6 +10,7 @@ class SquareOsc:
         self.rotation = 0
         self.CLICK_TIME = 4
         self.bang_flg = False
+        self.TEST = 137
 
     def bang(self) :
         self.bang_flg = True
@@ -24,13 +25,13 @@ class SquareOsc:
         if self.rotation < self.CLICK_TIME :
             return True
         else:
-            print "Finish ALL."
+            # print "Finish ALL."
             self.reset()
             return False
 
     def endCheck(self):
         if self.now >= self.LIST_MAX :
-            print "finish play seq. loop"
+            # print "finish play seq. loop"
             self.now = 0
             self.rotation += 1
             return True
@@ -39,17 +40,15 @@ class SquareOsc:
 
     def seqCheck(self):
         if self.list[self.now]==1 :
-            print "the seq is ON RT1"
+            # print "the seq is ON RT1"
             self.now +=1
             return True
         elif self.list[self.now]==0 :
-            print "the seq is OFF RT0"
+            # print "the seq is OFF RT0"
             self.now +=1
             return False
 
     def cycle (self) :
-        # print "SQOSC UPDATE"
-        # return 137
 
         if self.bang_flg==False :
             return -1
