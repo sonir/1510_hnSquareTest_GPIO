@@ -3,45 +3,68 @@ import sl_metro
 class SquareOsc:
 
     def __init__(self, interval):
-        self.metro = sl_metro.Metro(interval)
-        self.blinker = False
-        self.counter = 0
+        self.metro = sl_metro.Metro( (interval*0.1) )
         self.list = [1, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.list_max = 9
+        self.LIST_MAX = 9
         self.now = 0
         self.rotation = 0
-        self.click_times = 4
+        self.CLICK_TIME = 4
         self.bang_flg = False
 
     def bang(self) :
         self.bang_flg = True
+        self.metro.reset()
 
-    def update (self) :
+    def reset(self):
+        self.bang_flg = False
+        self.rotation = 0
+        self.now = 0
+
+    def countCheck(self):
+        if self.rotation < self.CLICK_TIME :
+            return True
+        else:
+            print "Finish ALL."
+            self.reset()
+            return False
+
+    def endCheck(self):
+        if self.now >= self.LIST_MAX :
+            print "finish play seq. loop"
+            self.now = 0
+            self.rotation += 1
+            return True
+        else:
+            return False
+
+    def seqCheck(self):
+        if self.list[self.now]==1 :
+            print "the seq is ON RT1"
+            self.now +=1
+            return True
+        elif self.list[self.now]==0 :
+            print "the seq is OFF RT0"
+            self.now +=1
+            return False
+
+    def cycle (self) :
+        # print "SQOSC UPDATE"
+        # return 137
+
+        if self.bang_flg==False :
+            return -1
+
         if self.metro.update() :
-            if(self.rotation < self.click_times):
-                if self.now >= self.list_max :
-                    self.now = 0
-                    self.rotation += 1
+            if self.countCheck():
+                if self.endCheck()==True:
                     return 0
-                elif self.list[self.now]==1:
-                    self.now +=1
-                    return 1
                 else:
-                    self.now +=1
-                    # print("off")
-                    return 0
+                    if self.seqCheck()==True:
+                        return 1
+                    else:
+                        return 0
             else:
-                return -1
+                #FINISH
+                return -2
         else:
             return -1
-                    # print("rest")
-
-
-
-
-
-                # self.blinker = ~self.blinker
-                # if self.blinker:
-                #     print("OK")
-                # else:
-                #     print("NULL")

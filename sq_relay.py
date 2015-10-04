@@ -1,4 +1,4 @@
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import sq_osc
 
 class SquareRelay :
@@ -24,30 +24,39 @@ class SquareRelay :
             self.seqs.append( sq_osc.SquareOsc(self.SEQ_SPD) )
 
     def gpio_setup (self) :
-        pass
-        # GPIO.setmode(GPIO.BOARD)
-        # GPIO.setup(self.RELAY1,GPIO.OUT)
-        # GPIO.setup(self.RELAY2,GPIO.OUT)
-        # GPIO.setup(self.RELAY3,GPIO.OUT)
-        # GPIO.setup(self.RELAY4,GPIO.OUT)
-        # GPIO.setup(self.PANEL_RELAY1,GPIO.OUT)
-        # GPIO.setup(self.PANEL_RELAY2,GPIO.OUT)
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.RELAY1,GPIO.OUT)
+        GPIO.setup(self.RELAY2,GPIO.OUT)
+        GPIO.setup(self.RELAY3,GPIO.OUT)
+        GPIO.setup(self.RELAY4,GPIO.OUT)
+        GPIO.setup(self.PANEL_RELAY1,GPIO.OUT)
+        GPIO.setup(self.PANEL_RELAY2,GPIO.OUT)
 
 
     def update (self) :
-        for var in range(0, self.RELAY_MAX):
-            flg = self.seqs[var].update
-            if flg==True :
-                print "on"
-                # GPIO.output(self.pins[var],True)
-            else:
-                # GPIO.output(self.pins[var],False)
-                print "off"
+        print "SQRL::update"
+        flg = self.seqs[0].cycle
+
+        # for var in range(0, self.RELAY_MAX):
+        #     flg = self.seqs[var].update
+        #     if flg== 1 :
+        #         print "on"
+        #         GPIO.output(self.pins[var],True)
+        #         time.sleep(0.1)
+        #     elif flg == 0 :
+        #         GPIO.output(self.pins[var],False)
+        #         print "off"
+        #     else :
+        #         print "unknown"
 
     def on (self,relay_num) :
         # GPIO.output(self.pins[relay_num],True)
+        print "SEQ:bang"
         self.seqs[relay_num].bang()
 
     def off (self,relay_num) :
         pass
         # GPIO.output(self.pins[relay_num],False)
+
+    def Terminate(self) :
+        GPIO.cleanup()
