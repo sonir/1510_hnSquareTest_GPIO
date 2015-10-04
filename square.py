@@ -14,12 +14,10 @@ try:
 		flg = sqo.update()
 		if flg == 1 :
 			GPIO.output(PIN,True)
-			GPIO.output(PIN2,False)
 			time.sleep(0.1)
 			print("ON")
 		elif  flg == 0 :
-			GPIO.output(PIN,False)
-			GPIO.output(PIN2,True)
+			GPIO.output	(PIN,False)
 		elif flg == -1 :
 			pass;
 
