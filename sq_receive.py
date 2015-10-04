@@ -11,7 +11,7 @@ class SquareReceive(sl_receive.SlReceive):
         self.s.addMsgHandler("/trigger", self.trigger)
 
     def trigger(self, add, tags, stuff, source):
-        print "Trigger"
+        print ("Trigger")
 
     # def terminate(self):
     #     print "SQOSC:Terminated."

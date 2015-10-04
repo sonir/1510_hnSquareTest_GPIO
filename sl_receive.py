@@ -23,12 +23,12 @@ class SlReceive :
 		self.addMsgHandlers()
 
 		# just checking which handlers we have added
-		print "Registered Callback-functions are :"
+		print ("Registered Callback-functions are :")
 		for addr in self.s.getOSCAddressSpace():
-			print addr
+			print(addr)
 
 		# Start OSCServer
-		print "\nStarting OSCServer. Use ctrl-C to quit."
+		print ("\nStarting OSCServer. Use ctrl-C to quit.")
 		self.st = threading.Thread( target = self.s.serve_forever )
 		self.st.start()
 
@@ -43,17 +43,17 @@ class SlReceive :
 		print("test1")
 
 	def test2(self, add, tags, stuff, source):
-		print "X Value is: "
-		print stuff[0]
-		print "Y Value is: "
-		print stuff[1]  #stuff is a 'list' variable
+		print ("X Value is: ")
+		print (stuff[0])
+		print ("Y Value is: ")
+		print (stuff[1])  #stuff is a 'list' variable
 
 	def update(self):
 		pass
 
 	def terminate(self):
-		print "\nClosing OSCServer."
+		print ("\nClosing OSCServer.")
 		self.s.close()
-		print "Waiting for Server-thread to finish"
+		print ("Waiting for Server-thread to finish")
 		self.st.join()
-		print "Done"
+		print ("Done")
