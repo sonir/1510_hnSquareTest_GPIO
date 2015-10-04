@@ -13,8 +13,8 @@ class SquareOsc:
         self.click_times = 4
         self.bang_flg = False
 
-        def bang(self) :
-            self.bang_flg = True
+    def bang(self) :
+        self.bang_flg = True
 
     def update (self) :
         if self.metro.update() :
